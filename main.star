@@ -184,6 +184,7 @@ def run(plan, args={}):
             plan=plan,
             image=optimism_args.interop_mon.image,
             l2_rpcs=",".join([l2.participants[0].el_context.ws_url for l2 in l2s]),
+            observability_helper=observability_helper,
         )
 
     observability.launch(
