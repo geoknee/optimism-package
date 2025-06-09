@@ -6,6 +6,7 @@ op_supervisor_launcher = import_module("./src/supervisor/op-supervisor/launcher.
 op_challenger_launcher = import_module("./src/challenger/op-challenger/launcher.star")
 
 faucet = import_module("./src/faucet/op-faucet/op_faucet_launcher.star")
+interop_mon = import_module("./src/interop-mon/op-interop-mon/op_interop_mon_launcher.star")
 observability = import_module("./src/observability/observability.star")
 util = import_module("./src/util.star")
 
@@ -175,6 +176,14 @@ def run(plan, args={}):
             l1_priv_key=l1_priv_key,
             deployment_output=deployment_output,
             l2s=l2s,
+        )
+
+    # Launch interop monitoring
+    if optimism_args.interop_mon.enabled:
+        interop_mon.launch(
+            plan=plan,
+            image=optimism_args.interop_mon.image,
+            l2_rpcs=",".join([l2.participants[0].el_context.ws_url for l2 in l2s]),
         )
 
     observability.launch(
