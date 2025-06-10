@@ -6,7 +6,7 @@ _id = import_module("/src/util/id.star")
 _registry = import_module("/src/package_io/registry.star")
 
 _DEFAULT_ARGS = {
-    "enabled": True,
+    "enabled": False,
     "image": None,
 }
 
